@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.hilttutorial.database.DatabaseAdapter
 import com.example.hilttutorial.database.DatabaseService
 import com.example.hilttutorial.network.INetworkAdapter
+import com.example.hilttutorial.network.NetworkService
 import com.example.hilttutorial.ui.theme.HiltTutorialTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -21,7 +22,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @Inject lateinit var databaseAdapter: DatabaseAdapter
-    @Inject lateinit var networkAdapter: INetworkAdapter
+    //@Inject lateinit var networkAdapter: INetworkAdapter
+    @Inject lateinit var networkService: NetworkService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -33,7 +35,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting("Android")
-                    networkAdapter.log("Interface binding")
+                    //networkAdapter.log("Interface binding")
+                    networkService.performNetworkCall()
                 }
             }
         }

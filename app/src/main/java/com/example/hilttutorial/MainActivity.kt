@@ -37,7 +37,13 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+    @Inject
+    fun directToDb(databaseService: DatabaseService){
+        databaseService.log("Method Injection")
+    }
 }
+
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {

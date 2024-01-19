@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.hilttutorial.database.DatabaseAdapter
 import com.example.hilttutorial.database.DatabaseService
+import com.example.hilttutorial.network.INetworkAdapter
 import com.example.hilttutorial.ui.theme.HiltTutorialTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -20,6 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @Inject lateinit var databaseAdapter: DatabaseAdapter
+    @Inject lateinit var networkAdapter: INetworkAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -31,16 +33,12 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting("Android")
-                    Log.d("DI","DatabaseAdapter: $databaseAdapter")
-                    databaseAdapter.log("Hello Hilt")
+                    networkAdapter.log("Interface binding")
                 }
             }
         }
     }
-    @Inject
-    fun directToDb(databaseService: DatabaseService){
-        databaseService.log("Method Injection")
-    }
+
 }
 
 

@@ -5,6 +5,6 @@ import javax.inject.Inject
 
 class DatabaseService @Inject constructor() {
     fun log(msg: String){
-        Log.d("Hilt-tutorial","Database Service message: $msg")
+        Log.d("DI","Database Service message: $msg")
     }
 }

@@ -2,6 +2,7 @@ package com.example.hilttutorial.network
 
 import android.util.Log
 
+
 class NetworkService private constructor(builder: Builder) {
 
     private val protocol: String?
@@ -32,7 +33,7 @@ class NetworkService private constructor(builder: Builder) {
         fun protocol(protocol: String) = apply { this.protocol= protocol }
         fun host(host: String) = apply { this.host= host }
         fun path(path: String) = apply { this.path= path }
-        fun interceptor(interceptor: Interceptor?) = apply { this.interceptor= interceptor }
+        fun interceptor(interceptor: Interceptor) = apply { this.interceptor= interceptor }
         fun build() = NetworkService(this)
 
     }

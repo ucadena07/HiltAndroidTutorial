@@ -1,9 +1,9 @@
 package com.example.hilttutorial.hilt
 
-import com.example.hilttutorial.network.INetworkAdapter
-import com.example.hilttutorial.network.NetworkAdapter
+import com.example.hilttutorial.network.CallInterceptor
 import com.example.hilttutorial.network.NetworkService
-import dagger.Binds
+import com.example.hilttutorial.network.ResponseInterceptor
+
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,12 +15,30 @@ class NetworkModule {
     //@Binds
     //abstract fun bindNetworkAdapterImp(networkAdapterImpl: NetworkAdapter) : INetworkAdapter
 
+//    @Provides
+//    fun provideNetworkService(): NetworkService{
+//        return NetworkService.Builder()
+//            .host("google.com")
+//            .protocol("HTTPS")
+//            .build()
+//    }
+
+    @CallInterceptorQualifier
     @Provides
-    fun provideNetworkService(): NetworkService{
+    fun provideCallNetworkService(): NetworkService{
+         return NetworkService.Builder()
+             .host("google.com")
+             .protocol("HTTPS")
+             .interceptor(CallInterceptor())
+             .build()
+    }
+    @ResponseInterceptorQualifier
+    @Provides
+    fun provideResponseNetworkService(): NetworkService{
         return NetworkService.Builder()
             .host("google.com")
             .protocol("HTTPS")
+            .interceptor(ResponseInterceptor())
             .build()
     }
-
 }

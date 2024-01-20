@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.hilttutorial.database.DatabaseAdapter
 import com.example.hilttutorial.database.DatabaseService
+import com.example.hilttutorial.hilt.CallInterceptorQualifier
+import com.example.hilttutorial.hilt.ResponseInterceptorQualifier
 import com.example.hilttutorial.network.INetworkAdapter
 import com.example.hilttutorial.network.NetworkService
 import com.example.hilttutorial.ui.theme.HiltTutorialTheme
@@ -23,6 +25,8 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
     @Inject lateinit var databaseAdapter: DatabaseAdapter
     //@Inject lateinit var networkAdapter: INetworkAdapter
+    //@CallInterceptorQualifier
+    @ResponseInterceptorQualifier
     @Inject lateinit var networkService: NetworkService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

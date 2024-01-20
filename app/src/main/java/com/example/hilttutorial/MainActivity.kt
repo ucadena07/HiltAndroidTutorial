@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -17,6 +18,7 @@ import com.example.hilttutorial.hilt.CallInterceptorQualifier
 import com.example.hilttutorial.hilt.ResponseInterceptorQualifier
 import com.example.hilttutorial.network.INetworkAdapter
 import com.example.hilttutorial.network.NetworkService
+import com.example.hilttutorial.stats.StatsViewModel
 import com.example.hilttutorial.ui.theme.HiltTutorialTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -28,22 +30,44 @@ class MainActivity : ComponentActivity() {
     //@CallInterceptorQualifier
     @ResponseInterceptorQualifier
     @Inject lateinit var networkService: NetworkService
+    private val statsViewmodel : StatsViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            HiltTutorialTheme {
+        try {
+            setContent {
+                HiltTutorialTheme {
 
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                    databaseAdapter.log("Interface binding")
-                    networkService.performNetworkCall()
+                    // A surface container using the 'background' color from the theme
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        Greeting("Android")
+                        databaseAdapter.log("Interface binding")
+                        networkService.performNetworkCall()
+                        statsViewmodel.statsLiveData.observe(this){
+                            Log.d("DI", "New stats coming in: $it")
+                        }
+                        statsViewmodel.startStatsCollection()
+                    }
+                }
+            }
+        }catch(e: Exception){
+            setContent {
+                HiltTutorialTheme {
+
+                    // A surface container using the 'background' color from the theme
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        Text(e.message.toString())
+
+                    }
                 }
             }
         }
+
     }
 
 }

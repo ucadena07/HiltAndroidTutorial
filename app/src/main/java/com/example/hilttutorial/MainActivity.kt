@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting("Android")
-                    //networkAdapter.log("Interface binding")
+                    databaseAdapter.log("Interface binding")
                     networkService.performNetworkCall()
                 }
             }

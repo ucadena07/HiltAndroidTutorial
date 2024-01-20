@@ -1,8 +1,11 @@
 package com.example.hilttutorial.hilt
 
 import com.example.hilttutorial.network.CallInterceptor
+import com.example.hilttutorial.network.INetworkAdapter
+import com.example.hilttutorial.network.NetworkAdapter
 import com.example.hilttutorial.network.NetworkService
 import com.example.hilttutorial.network.ResponseInterceptor
+import dagger.Binds
 
 import dagger.Module
 import dagger.Provides
@@ -12,8 +15,8 @@ import dagger.hilt.android.components.ActivityComponent
 @Module
 @InstallIn(ActivityComponent::class)
 class NetworkModule {
-    //@Binds
-    //abstract fun bindNetworkAdapterImp(networkAdapterImpl: NetworkAdapter) : INetworkAdapter
+//    @Binds
+//    abstract fun bindNetworkAdapterImp(networkAdapterImpl: NetworkAdapter) : INetworkAdapter
 
 //    @Provides
 //    fun provideNetworkService(): NetworkService{
